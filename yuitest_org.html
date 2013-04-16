@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>
+ 
+<!-- Source File -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yuitest/yuitest-min.js"></script>
+<title>YUI Test Sample</title>
+<script type="text/javascript">
+function $(n) { return document.getElementById(n); }
+function to_hankaku(str) {
+    return str.replace(/([Ａ-Ｚａ-ｚ０-９])/g,
+                       function (s) {
+                           return String.fromCharCode(s.charCodeAt(0) - 65248);
+                       });
+}
+</script>
+</head>
+<body>
+<p>YUI Test Sample</p>
+<input type="text" id="from" value="Yahoo" />
+<input type="submit" onclick="$('to').value = to_hankaku($('from').value);" />
+<input type="text" id="to" value="" />
+</body>
+</html>
+<script type="text/javascript">
+(function() {
+
+var oTestCase = new YAHOO.tool.TestCase({
+    name: "to_hankaku Test",
+    testToHankaku: function() {
+        var Assert = YAHOO.util.Assert;
+        Assert.areEqual('Yahoo', to_hankaku('Ｙａｈｏｏ'));
+        Assert.areEqual('123', to_hankaku('１２３'));
+        Assert.areEqual('Yahoo！', to_hankaku('Ｙａｈｏｏ！'));
+        Assert.areEqual('TB-303', to_hankaku('ＴＢ−３０３')); // failed test case
+    }
+});
+
+var TestRunner = YAHOO.tool.TestRunner;
+TestRunner.subscribe(TestRunner.TEST_PASS_EVENT, function(data) {
+    console.log(data.testName + " passed.");
+});
+TestRunner.subscribe(TestRunner.TEST_FAIL_EVENT, function(data) {
+    console.error(data.testName + " failed with message: " + data.error.getMessage());
+});
+TestRunner.add(oTestCase);
+TestRunner.run();
+
+})();
+</script>

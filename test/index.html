@@ -1,0 +1,45 @@
+<!--CSS-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/yuitest/assets/testlogger.css">
+
+<!-- Dependencies --> 
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>
+
+<!-- Source File -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yuitest/yuitest-min.js"></script>
+
+<script>
+function sortArray(array) {
+    if (array instanceof Array){
+        array.sort();
+    } else {
+        throw new TypeError("Expected an array");
+    }
+}
+
+var oTestCase = new YAHOO.tool.TestCase({
+
+    name: "TestCase Name",
+    
+    //---------------------------------------------
+    // Special instructions
+    //---------------------------------------------
+    
+    _should: {
+        error: {
+            testSortArray: true //this test should throw an error
+        }
+    },
+
+    //---------------------------------------------
+    // Tests
+    //---------------------------------------------        
+
+    testSortArray: function () {
+        sortArray(12);  //this should throw an error
+    }
+
+});
+
+</script>

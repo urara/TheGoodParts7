@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>
+ 
+<!-- Source File -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yuitest/yuitest-min.js"></script>
+<script src="sample1.js"></script>
+
+<title>Test</title>
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">
+(function() {
+
+ var Assert = YAHOO.util.Assert;
+ var myTestCase = new YAHOO.tool.TestCase({
+    name: "Test",
+    testParseUrl: function() {
+        Assert.areEqual('url', names[0] );
+        Assert.areEqual('http://ora.com:80/goodparts?q#fragment', result[0] );
+        Assert.areEqual('path', names[5] );
+        Assert.areEqual('goodparts', result[5] );
+    },
+    testParseNumber: function() {
+        Assert.isTrue(parse_number.test('1'));
+	Assert.isFalse(parse_number.test('number'));
+	Assert.isTrue(parse_number.test('98.6'));
+	Assert.isFalse(parse_number.test('132.21.86.100'));
+	Assert.isTrue(parse_number.test('123.45E-67'));
+	Assert.isFalse(parse_number.test('123.45D-67'));
+	Assert.isTrue(parse_number.test('123.E-67')); // ???
+    },
+testConstractor: function() {
+        Assert.areEqual('"test"', my_regexp.exec('"test"'));
+    }
+
+});
+
+var oTestCase2 = new YAHOO.tool.TestCase({
+    name: "7-1 Test",
+});
+var TestRunner = YAHOO.tool.TestRunner;
+TestRunner.subscribe(TestRunner.TEST_PASS_EVENT, function(data) {
+    console.log(data.testName + " passed.");
+});
+TestRunner.subscribe(TestRunner.TEST_FAIL_EVENT, function(data) {
+    console.error(data.testName + " failed with message: " + data.error.getMessage());
+});
+TestRunner.add(myTestCase);
+TestRunner.run();
+
+})();
+</script>
