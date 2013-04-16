@@ -25,9 +25,9 @@ var test = function(num){
 
 var my_regexp = /"(?:\\.|[^\\\"])*"/g;
 
-var hoge = my_regexp.exec("test");
-
-
 //7-3
-
-
+//7-4
+var doubled_words = /[A-Za-z\u00C0-\u1FFF\u2800-\uFFFD'\-]+\s+\1/gi;
+//7-5
+//7-6
+// var rengexp1 = (?:!|"|#|\$|%|&|'|\(|\)|\*|\+|,|-|\.|\/|:|;|<|=|>|@|\[|\\|]|\^|_|` |\{|\||\}|~);

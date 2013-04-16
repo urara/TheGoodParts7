@@ -36,6 +36,36 @@
     },
 testConstractor: function() {
         Assert.areEqual('"test"', my_regexp.exec('"test"'));
+    },
+
+testRegExpItem: function() {
+	//7-3-1
+        Assert.areEqual('in',"into".match(/in|int/));
+	//7-3-2
+	Assert.areEqual('ぁ', "うわぁぁぁぁぁぁぁ!".match(/ぁ/));
+	//7-3-3
+	Assert.areEqual("$$$", "$$$hoge".match(/\$*/));
+	Assert.areNotEqual('$$$$', "aaa$$$$hoge".match(/\$*/)); //???
+	//7-3-4
+	Assert.areEqual("This", "This is a Window.".match(/\w+/i));
+	Assert.areNotEqual(".", "This is a Window.".match(/\W+/i)); //???
+
+	Assert.areNotEqual("is", "I think that that that that that writer is wrong.".match(doubled_words));
+
+	//7-3-5 肯定先読み
+	Assert.areEqual("Windows ", "Windows 2000".match(/Windows (?=95|98|NT|2000)/));
+	Assert.areEqual(null, "Windows 8".match(/Windows (?=95|98|NT|2000)/));
+	//7-3-6
+	//Assert.areEqual("*", "`{|~==+*>".match(rengexp1));
+	//Assert.areEqual("*", "`{|~==+*>".match(rengexp2));
+	//7-3-7
+	Assert.areEqual();
+	//7-3-8
+	Assert.isNull("うわぁぁぁ!!".match(/ぁ{4}/));
+
+	Assert.areEqual('ぁぁぁぁ', "うわぁぁぁぁぁぁぁ!".match(/ぁ{4}/));
+	Assert.areEqual('ぁぁぁぁぁぁぁ', "うわぁぁぁぁぁぁぁ!".match(/ぁ{4,}/));
+
     }
 
 });
